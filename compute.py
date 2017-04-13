@@ -152,5 +152,3 @@ if __name__ == '__main__':
     runner = ApplicationRunner(args.router, args.realm)
 
     runner.run(session, auto_reconnect=True)
-                                                                                     153,1         Bot
-
