@@ -40,7 +40,7 @@ txaio.use_twisted()
 
 import neurokernel.mpi_relaunch
 
-def do_compute(call_no, delay,user,network_graph,network_input):
+def do_compute(call_no, user):#delay,user,network_graph,network_input):
     started = utcnow()
     process_id = os.getpid()
     thread_id = _thread.get_ident()
@@ -67,11 +67,11 @@ def do_compute(call_no, delay,user,network_graph,network_input):
     fl_output_processor = FileOutputProcessor([('V',None),('spike_state',None)], 'new_output.h5', sample_interval=1)
 
     man.add(LPU, 'ge', dt, comp_dict, conns,
-        device=args.gpu_dev, input_processors = [fl_input_processor],
+        device=0, input_processors = [fl_input_processor],
         output_processors = [fl_output_processor], debug=args.debug)
 
     man.spawn()
-    man.start(steps=args.steps)
+    man.start(steps=steps)
     man.wait()
     time.sleep(5)
 
